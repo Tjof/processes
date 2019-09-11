@@ -36,7 +36,7 @@ namespace Processes
             while (true)
             {
                 processes = System.Diagnostics.Process.GetProcesses();
-                Thread.Sleep(50);
+                Thread.Sleep(1000);
                 // listView.ItemsSource = processes.Select(p => new ProcessInfo(p) { SizeType = 1 }).ToArray();
                 Dispatcher.BeginInvoke(new Action(() => listView.ItemsSource = processes.Select(p => new ProcessInfo(p) { SizeType = 1 }).ToArray()));
             }

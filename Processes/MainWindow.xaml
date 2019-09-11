@@ -13,27 +13,31 @@
         </Grid.RowDefinitions>
 
 
-        <TabControl HorizontalAlignment="Left" Height="402" Margin="10,10,0,0" VerticalAlignment="Top" Width="804" Grid.RowSpan="2">
-            <TabItem Header="TabItem">
-                <ListView x:Name="listView" Margin="0,0,0,39">
+        <TabControl HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="764" Grid.RowSpan="2">
+            <TabItem Header="Процессы">
+                <StackPanel>
+                    <ListView x:Name="listView" Height="335">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=BaseProcess.ProcessName}"  Width="100" >Имя процесса</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Memory}" Width="100" >Объём памяти</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=HandleCount}" Width="120" >Открытые ресурсы</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReadOperationCount}" Width="100" >Число чтений</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=WriteOperationCount}" Width="100" >Число записей</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReadTransferCount}" Width="100" >Прочитано байт</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=WriteTransferCount }" Width="100">Записано байт</GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=BaseProcess.ProcessName}"  Width="100" >Имя процесса</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Memory}" Width="100" >Объём памяти</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=HandleCount}" Width="120" >Открытые ресурсы</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=ReadOperationCount}" Width="100" >Число чтений</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=WriteOperationCount}" Width="100" >Число записей</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=ReadTransferCount}" Width="100" >Прочитано байт</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=WriteTransferCount }" Width="100">Записано байт</GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                    <Button Content="Убийца" />
+                </StackPanel>
+                
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
+            
         </TabControl>
-        <Button x:Name="button2" Content="KILL" Margin="0,291,20,0" Padding="50,15,50,15" Background="#FFF9F1F1" BorderBrush="{x:Null}" Click="Button2_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Height="35" Width="134" />
     </Grid>
 </Window>
