@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using ProcessesClass;
+using System.Threading;
 
 namespace Processes
 {
@@ -26,17 +27,22 @@ namespace Processes
         public MainWindow()
         {
             InitializeComponent();
+            new Thread(ProcRefresh).Start();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void ProcRefresh()
         {
             Process[] processes;
-            processes = System.Diagnostics.Process.GetProcesses();
-            listView.ItemsSource = processes.Select( p => new ProcessInfo(p) { SizeType = 1 }).ToArray();
+            while (true)
+            {
+                processes = System.Diagnostics.Process.GetProcesses();
+                Thread.Sleep(50);
+                // listView.ItemsSource = processes.Select(p => new ProcessInfo(p) { SizeType = 1 }).ToArray();
+                Dispatcher.BeginInvoke(new Action(() => listView.ItemsSource = processes.Select(p => new ProcessInfo(p) { SizeType = 1 }).ToArray()));
+            }
+            
         }
 
-
-        
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
             try
