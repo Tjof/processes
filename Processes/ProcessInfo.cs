@@ -10,7 +10,7 @@ using Processes;
 
 namespace ProcessesClass
 {
-    class ProcessInfo
+    public class ProcessInfo
     {
         IO_COUNTERS ? lastio = new IO_COUNTERS();
         

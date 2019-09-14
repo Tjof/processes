@@ -5,39 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Processes"
         mc:Ignorable="d"
-        Title="ПОСТАВЬТЕ 3 ХОТЯ БЫ" Height="450" Width="830" ResizeMode="NoResize">
-    <Grid Background="#FFEC4646">
+        Title="ПОСТАВЬТЕ 3 ХОТЯ БЫ" Height="423" Width="770" ResizeMode="NoResize">
+    <Grid Background="#FFB273">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"></RowDefinition>
             <RowDefinition Height="339*"></RowDefinition>
         </Grid.RowDefinitions>
 
 
-        <TabControl HorizontalAlignment="Left" Height="390" Margin="10,10,0,0" VerticalAlignment="Top" Width="764" Grid.RowSpan="2">
+        <TabControl HorizontalAlignment="Left" Height="390" Margin="-1,0,0,0" VerticalAlignment="Top" Width="755" Grid.RowSpan="2">
             <TabItem Header="Процессы">
                 <StackPanel>
-                    <ListView x:Name="listView" Height="335">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=BaseProcess.ProcessName}"  Width="100" >Имя процесса</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Memory}" Width="100" >Объём памяти</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=HandleCount}" Width="120" >Открытые ресурсы</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReadOperationCount}" Width="100" >Число чтений</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=WriteOperationCount}" Width="100" >Число записей</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=ReadTransferCount}" Width="100" >Прочитано байт</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=WriteTransferCount }" Width="100">Записано байт</GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <DataGrid x:Name="listView" Height="335" ItemsSource="{Binding ProcessesList}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=BaseProcess.ProcessName}"  Width="100" Header="Имя процесса"/>
+                            <DataGridTextColumn Binding="{Binding Path=Memory}" Width="100"  Header="Объём памяти"/>
+                            <DataGridTextColumn Binding="{Binding Path=HandleCount}" Width="120"  Header="Открытые ресурсы"/>
+                            <DataGridTextColumn Binding="{Binding Path=ReadOperationCount}" Width="100"  Header="Число чтений"/>
+                            <DataGridTextColumn Binding="{Binding Path=WriteOperationCount}" Width="100"  Header="Число записей"/>
+                            <DataGridTextColumn Binding="{Binding Path=ReadTransferCount}" Width="100"  Header="Прочитано байт"/>
+                            <DataGridTextColumn Binding="{Binding Path=WriteTransferCount }" Width="100" Header="Записано байт"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                     <Button Content="Убийца" />
                 </StackPanel>
-                
+
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            
+
         </TabControl>
     </Grid>
 </Window>
