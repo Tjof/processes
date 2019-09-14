@@ -7,10 +7,7 @@
         mc:Ignorable="d"
         Title="ПОСТАВЬТЕ 3 ХОТЯ БЫ" Height="423" Width="770" ResizeMode="NoResize">
     <Grid Background="#FFB273">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80*"></RowDefinition>
-            <RowDefinition Height="339*"></RowDefinition>
-        </Grid.RowDefinitions>
+        
 
 
         <TabControl HorizontalAlignment="Left" Height="390" Margin="-1,0,0,0" VerticalAlignment="Top" Width="755" Grid.RowSpan="2">
@@ -18,7 +15,7 @@
                 <StackPanel>
                     <DataGrid x:Name="listView" Height="335" ItemsSource="{Binding ProcessesList}" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=BaseProcess.ProcessName}"  Width="100" Header="Имя процесса"/>
+                            <DataGridTextColumn Binding="{Binding Path=ProcessName}"  Width="100" Header="Имя процесса"/>
                             <DataGridTextColumn Binding="{Binding Path=Memory}" Width="100"  Header="Объём памяти"/>
                             <DataGridTextColumn Binding="{Binding Path=HandleCount}" Width="120"  Header="Открытые ресурсы"/>
                             <DataGridTextColumn Binding="{Binding Path=ReadOperationCount}" Width="100"  Header="Число чтений"/>
@@ -32,8 +29,28 @@
                 </StackPanel>
 
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Быстродействие?">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" Height="123" Margin="416,173,0,0" VerticalAlignment="Top" Width="244">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="112" />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Дескрипторов"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Потоков"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=ProccessCount}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено (МБ)"/>
+                    </Grid>
+                </Grid>
             </TabItem>
 
         </TabControl>

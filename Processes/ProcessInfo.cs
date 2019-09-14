@@ -127,5 +127,13 @@ namespace ProcessesClass
         {
             BaseProcess = process;
         }
+
+        public string ProccessCount
+        {
+            get
+            {
+                return System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString();
+            }
+        }
     }
 }
