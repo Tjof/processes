@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Processes"
         mc:Ignorable="d"
         Title="ПОСТАВЬТЕ 3 ХОТЯ БЫ" Height="423" Width="770" ResizeMode="NoResize">
-    <Grid Background="#FFB273">
+    <Grid Background="#FFF8E9">
         
 
 
@@ -30,8 +30,8 @@
 
             </TabItem>
             <TabItem Header="Быстродействие?">
-                <Grid Background="#FFE5E5E5">
-                    <Grid HorizontalAlignment="Left" Height="123" Margin="416,173,0,0" VerticalAlignment="Top" Width="244">
+                <Grid Background="#FFF8E9">
+                    <Grid HorizontalAlignment="Left" Height="123" Margin="416,173,0,0" VerticalAlignment="Top" Width="305">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="112" />
                             <ColumnDefinition/>
@@ -48,6 +48,7 @@
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=ProccessCount}"/>
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=TickCount}"/>
                         <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено (МБ)"/>
                     </Grid>
                 </Grid>

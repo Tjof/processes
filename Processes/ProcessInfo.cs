@@ -30,6 +30,7 @@ namespace ProcessesClass
         public ulong Dwrite { get; set; }
         public ulong ROC { get; set; }
         public ulong WOC { get; set; }
+        string TC;
 
         public double ReadTransferCount
         {
@@ -128,12 +129,6 @@ namespace ProcessesClass
             BaseProcess = process;
         }
 
-        public string ProccessCount
-        {
-            get
-            {
-                return System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString();
-            }
-        }
+        
     }
 }

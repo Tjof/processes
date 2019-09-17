@@ -42,6 +42,7 @@ namespace Processes
             new Thread(ProcRefresh).Start();
         }
 
+        
         void ProcRefresh()
         {
             Process[] processes;
@@ -53,6 +54,7 @@ namespace Processes
                 ProcessesList = processes.Select(p => new ProcessInfo(p) { SizeType = 1 })
                     .Select( pi => new { pi.ReadTransferCount, pi.ReadOperationCount, pi.BaseProcess.ProcessName, pi.WriteOperationCount, pi.Memory, pi.WriteTransferCount, pi.HandleCount })
                     .ToArray();
+                Performance performance = new Performance(System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString());
             }
 
         }
