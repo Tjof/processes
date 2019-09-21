@@ -42,6 +42,7 @@ namespace Processes
             DataContext = this;
             new Thread(ProcRefresh).Start();
             new Thread(PerformanceWHAAAAT).Start();
+
         }
 
         void ProcRefresh()
@@ -76,16 +77,49 @@ namespace Processes
                 Thread.Sleep(1000);
                 var processes = System.Diagnostics.Process.GetProcesses();
 
-                int i;
+                
+                int sumTheard = 0;
                 foreach (var Process in processes)
                 {
+                    int i = 0;
                     i = Process.Threads.Count;
-                    ;
+                    sumTheard += i;
+                }
+                performance.ProccessCount = sumTheard;
+
+                int sumProcesses = 0;
+                foreach (var Process in processes)
+                {
+                    sumProcesses = processes.Length;
+                }
+                performance.Processes = sumProcesses;
+
+                int sumHandleCount = 0;
+                foreach (var Process in processes)
+                {
+                    int i = 0;
+                    i = Process.HandleCount;
+                    sumHandleCount += i;
+                }
+                performance.HandleCount = sumHandleCount;
+
+                long sumVirtualMemorySize = 0;
+                foreach (var Process in processes)
+                {
+                    long i = 0;
+                    i = Process.PrivateMemorySize64/1024/1024;
+                    sumVirtualMemorySize += i;
+                }
+                performance.VirtualMemorySize = sumVirtualMemorySize;
+
+                int sum1 = 0;
+                foreach (var Process in processes)
+                {
+                    int i = 0;
+                    i = 
                 }
 
-
-                //.Threads.Count.ToString();
-                performance.TickCount = Environment.TickCount & Int32.MaxValue;
+                performance.TickCount = Environment.TickCount & Int32.MaxValue; // Время работы копьютера ШОК ПРЕОБРАЗОВАТЬ НАДО ВО ВРЕМЯ
             }
         }
 

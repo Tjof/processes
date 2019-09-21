@@ -23,14 +23,17 @@ namespace Processes
     public class Performance : INotifyPropertyChanged
     {
         
-        string _processCount;
+        int _processCount;
         int _tickcount;
+        int _processes;
+        int _handleCount;
+        long _virtualMemorySize;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string ProccessCount
+        public int ProccessCount
         {
-            get{ return System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString(); }
+            get{ return _processCount; }
             set
             {
                 _processCount = value;
@@ -38,11 +41,44 @@ namespace Processes
             }
         }
 
-        void OnPropertyChanged([CallerMemberName] string prop = "")
+        public int Processes
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            get
+            {
+                return _processes;
+            }
+            set
+            {
+                _processes = value;
+                OnPropertyChanged();
+            }
         }
 
+        public int HandleCount
+        {
+            get
+            {
+                return _handleCount;
+            }
+            set
+            {
+                _handleCount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public long VirtualMemorySize
+        {
+            get
+            {
+                return _virtualMemorySize;
+            }
+            set
+            {
+                _virtualMemorySize = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int TickCount
         {
@@ -54,6 +90,11 @@ namespace Processes
             }
         }
 
-        
+
+
+        void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
