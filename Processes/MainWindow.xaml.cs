@@ -35,14 +35,15 @@ namespace Processes
                 PropertyChanged?.Invoke( this, new PropertyChangedEventArgs("ProcessesList"));
             }
         }
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
             new Thread(ProcRefresh).Start();
+            new Thread(PerformanceWHAAAAT).Start();
         }
 
-        
         void ProcRefresh()
         {
             Process[] processes;
@@ -50,13 +51,42 @@ namespace Processes
             {
                 processes = System.Diagnostics.Process.GetProcesses();
                 Thread.Sleep(1000);
-                // listView.ItemsSource = processes.Select(p => new ProcessInfo(p) { SizeType = 1 }).ToArray();
                 ProcessesList = processes.Select(p => new ProcessInfo(p) { SizeType = 1 })
-                    .Select( pi => new { pi.ReadTransferCount, pi.ReadOperationCount, pi.BaseProcess.ProcessName, pi.WriteOperationCount, pi.Memory, pi.WriteTransferCount, pi.HandleCount })
+                    .Select(pi => new { pi.ReadTransferCount, pi.ReadOperationCount, pi.BaseProcess.ProcessName, pi.WriteOperationCount, pi.Memory, pi.WriteTransferCount, pi.HandleCount })
                     .ToArray();
-                Performance performance = new Performance(System.Diagnostics.Process.GetCurrentProcess().Threads.Count.ToString());
             }
+        }
 
+        private Performance performance = new Performance();
+
+        public Performance Performance
+        {
+            get => performance;
+            set
+            {
+                performance = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Performance"));
+            }
+        }
+
+        void PerformanceWHAAAAT()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                var processes = System.Diagnostics.Process.GetProcesses();
+
+                int i;
+                foreach (var Process in processes)
+                {
+                    i = Process.Threads.Count;
+                    ;
+                }
+
+
+                //.Threads.Count.ToString();
+                performance.TickCount = Environment.TickCount & Int32.MaxValue;
+            }
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)

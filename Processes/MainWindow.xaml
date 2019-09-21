@@ -45,10 +45,10 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Дескрипторов"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="Потоков"/>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=ProccessCount}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.ProccessCount}"/>
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
-                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=TickCount}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Performance.TickCount}"/>
                         <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено (МБ)"/>
                     </Grid>
                 </Grid>
