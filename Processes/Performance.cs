@@ -31,6 +31,7 @@ namespace Processes
         long _virtualMemorySize;
         ulong? _totalInstalledBytes;
         float _memoryAvailable;
+        float _cacheBytes;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -116,6 +117,19 @@ namespace Processes
             set
             {
                 _memoryAvailable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float CacheBytes
+        {
+            get
+            {
+                return _cacheBytes;
+            }
+            set
+            {
+                _cacheBytes = value;
                 OnPropertyChanged();
             }
         }

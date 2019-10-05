@@ -17,6 +17,7 @@ using ProcessesClass;
 using System.Threading;
 using System.ComponentModel;
 using System.Management;
+using Microsoft.VisualBasic;
 
 namespace Processes
 {
@@ -79,6 +80,8 @@ namespace Processes
                     select x.GetPropertyValue(property));
         }
 
+        
+
         void PerformanceWHAAAAT()
         {
             while (true)
@@ -122,20 +125,23 @@ namespace Processes
                 performance.VirtualMemorySize = sumVirtualMemorySize;
                 
                 var values = GetResults("Win32_PhysicalMemory", "Capacity");
-                ulong? sum = null;
+                ulong? Total = null;
                 foreach (var item in values)
                 {
                     var casted = item as ulong?;
                     if (casted.HasValue)
                     {
-                        if (sum == null) sum = 0;
-                        sum += casted.Value;
+                        if (Total == null) Total = 0;
+                        Total += casted.Value;
                     }
                 }
-                performance.TotalInstalledBytes = sum/1024/1024;
+                performance.TotalInstalledBytes = Total / 1024 /1024;
 
                 PerformanceCounter ramFree = new PerformanceCounter("Memory", "Available MBytes");
                 performance.MemoryAvailable = ramFree.NextValue();
+
+                PerformanceCounter CacheBytes = new PerformanceCounter("Memory", "Cache Bytes");
+                performance.CacheBytes = CacheBytes.NextValue()/1024;
 
                 performance.TickCount = Environment.TickCount & Int32.MaxValue; // Время работы копьютера ШОК ПРЕОБРАЗОВАТЬ НАДО ВО ВРЕМЯ
             }

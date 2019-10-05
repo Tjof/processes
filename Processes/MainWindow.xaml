@@ -68,6 +68,7 @@
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Всего"/>
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Performance.TotalInstalledBytes}"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="Кэшировано"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.CacheBytes}"/>
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Доступно"/>
                         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Performance.MemoryAvailable}"/>
                         <TextBlock Grid.Column="0" Grid.Row="3" Text="Свободно"/>
