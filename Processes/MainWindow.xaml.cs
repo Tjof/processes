@@ -16,6 +16,7 @@ using System.Diagnostics;
 using ProcessesClass;
 using System.Threading;
 using System.ComponentModel;
+using System.Management;
 
 namespace Processes
 {
@@ -28,11 +29,13 @@ namespace Processes
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public object[] ProcessesList {
+        public object[] ProcessesList
+        {
             get => _processesList;
-            set {
+            set
+            {
                 _processesList = value;
-                PropertyChanged?.Invoke( this, new PropertyChangedEventArgs("ProcessesList"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProcessesList"));
             }
         }
 
@@ -70,6 +73,12 @@ namespace Processes
             }
         }
 
+        public static IEnumerable<object> GetResults(string win32ClassName, string property)
+        {
+            return (from x in new ManagementObjectSearcher("SELECT * FROM " + win32ClassName).Get().OfType<ManagementObject>()
+                    select x.GetPropertyValue(property));
+        }
+
         void PerformanceWHAAAAT()
         {
             while (true)
@@ -77,7 +86,7 @@ namespace Processes
                 Thread.Sleep(1000);
                 var processes = System.Diagnostics.Process.GetProcesses();
 
-                
+
                 int sumTheard = 0;
                 foreach (var Process in processes)
                 {
@@ -107,17 +116,26 @@ namespace Processes
                 foreach (var Process in processes)
                 {
                     long i = 0;
-                    i = Process.PrivateMemorySize64/1024/1024;
+                    i = Process.PrivateMemorySize64 / 1024 / 1024;
                     sumVirtualMemorySize += i;
                 }
                 performance.VirtualMemorySize = sumVirtualMemorySize;
-
-                int sum1 = 0;
-                foreach (var Process in processes)
+                
+                var values = GetResults("Win32_PhysicalMemory", "Capacity");
+                ulong? sum = null;
+                foreach (var item in values)
                 {
-                    int i = 0;
-                    i = 
+                    var casted = item as ulong?;
+                    if (casted.HasValue)
+                    {
+                        if (sum == null) sum = 0;
+                        sum += casted.Value;
+                    }
                 }
+                performance.TotalInstalledBytes = sum/1024/1024;
+
+                PerformanceCounter ramFree = new PerformanceCounter("Memory", "Available MBytes");
+                performance.MemoryAvailable = ramFree.NextValue();
 
                 performance.TickCount = Environment.TickCount & Int32.MaxValue; // Время работы копьютера ШОК ПРЕОБРАЗОВАТЬ НАДО ВО ВРЕМЯ
             }

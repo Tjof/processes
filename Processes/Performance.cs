@@ -17,23 +17,26 @@ using ProcessesClass;
 using System.Threading;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Management;
 
 namespace Processes
 {
     public class Performance : INotifyPropertyChanged
     {
-        
+
         int _processCount;
         int _tickcount;
         int _processes;
         int _handleCount;
         long _virtualMemorySize;
+        ulong? _totalInstalledBytes;
+        float _memoryAvailable;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int ProccessCount
         {
-            get{ return _processCount; }
+            get { return _processCount; }
             set
             {
                 _processCount = value;
@@ -82,7 +85,7 @@ namespace Processes
 
         public int TickCount
         {
-            get{ return Environment.TickCount & Int32.MaxValue; }
+            get { return Environment.TickCount & Int32.MaxValue; }
             set
             {
                 _tickcount = value;
@@ -90,7 +93,32 @@ namespace Processes
             }
         }
 
+        
+        public ulong? TotalInstalledBytes
+        {
+            get
+            {
+                return _totalInstalledBytes;
+            }
+            set
+            {
+                _totalInstalledBytes = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public float MemoryAvailable
+        {
+            get
+            {
+                return _memoryAvailable;
+            }
+            set
+            {
+                _memoryAvailable = value;
+                OnPropertyChanged();
+            }
+        }
 
         void OnPropertyChanged([CallerMemberName] string prop = "")
         {
