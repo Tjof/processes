@@ -140,8 +140,8 @@ namespace Processes
                 PerformanceCounter ramFree = new PerformanceCounter("Memory", "Available MBytes");
                 performance.MemoryAvailable = ramFree.NextValue();
 
-                PerformanceCounter CacheBytes = new PerformanceCounter("Memory", "Cache Bytes");
-                performance.CacheBytes = CacheBytes.NextValue()/1024;
+                //PerformanceCounter memcounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+                //performance.CPULoad = (int)(memcounter.NextValue());
 
                 performance.TickCount = Environment.TickCount & Int32.MaxValue; // Время работы копьютера ШОК ПРЕОБРАЗОВАТЬ НАДО ВО ВРЕМЯ
             }

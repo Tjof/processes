@@ -4,12 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Processes"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="ПОСТАВЬТЕ 3 ХОТЯ БЫ" Height="423" Width="770" ResizeMode="NoResize">
     <Grid Background="#FFF8E9">
-
-
-
         <TabControl HorizontalAlignment="Left" Height="390" Margin="-1,0,0,0" VerticalAlignment="Top" Width="755" Grid.RowSpan="2">
             <TabItem Header="Процессы">
                 <StackPanel>
@@ -24,59 +22,58 @@
                             <DataGridTextColumn Binding="{Binding Path=WriteTransferCount }" Width="100" Header="Записано байт"/>
                         </DataGrid.Columns>
                     </DataGrid>
-
                     <Button Content="Убийца" />
                 </StackPanel>
 
             </TabItem>
             <TabItem Header="Быстродействие?">
                 <Grid Background="#FFF8E9">
-                    <Grid HorizontalAlignment="Left" Height="123" Margin="416,173,0,0" VerticalAlignment="Top" Width="305">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="183" />
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Дескрипторов"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Performance.HandleCount}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Потоков"/>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.ProccessCount}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
-                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Performance.Processes}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
-                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Performance.TickCount}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено вирт. памяти (МБ)"/>
-                        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Performance.VirtualMemorySize}"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" Height="123" Margin="31,173,0,0" VerticalAlignment="Top" Width="305">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="125" />
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Всего"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Performance.TotalInstalledBytes}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Кэшировано"/>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.CacheBytes}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Доступно"/>
-                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Performance.MemoryAvailable}"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Свободно"/>
-                    </Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Height="210">
+                            <lvc:Gauge From="0" To="100" Value="{Binding CPULoad}"/>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Height="150" Width="400" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="183" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Дескрипторов"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Performance.HandleCount}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Потоков"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.ProccessCount}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Performance.Processes}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
+                                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Performance.TickCount}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено вирт. памяти (МБ)"/>
+                                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Performance.VirtualMemorySize}"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Right" Height="60" VerticalAlignment="Top" Width="350">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="125" />
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Всего"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Performance.TotalInstalledBytes}"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Доступно"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.MemoryAvailable}"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
-
             </TabItem>
-
         </TabControl>
     </Grid>
 </Window>

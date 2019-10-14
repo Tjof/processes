@@ -31,9 +31,19 @@ namespace Processes
         long _virtualMemorySize;
         ulong? _totalInstalledBytes;
         float _memoryAvailable;
-        float _cacheBytes;
+        int _cPULoad;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public int CPULoad
+        {
+            get { return _cPULoad; }
+            set
+            {
+                _cPULoad = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int ProccessCount
         {
@@ -117,19 +127,6 @@ namespace Processes
             set
             {
                 _memoryAvailable = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public float CacheBytes
-        {
-            get
-            {
-                return _cacheBytes;
-            }
-            set
-            {
-                _cacheBytes = value;
                 OnPropertyChanged();
             }
         }
