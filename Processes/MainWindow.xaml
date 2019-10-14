@@ -30,7 +30,7 @@
                 <Grid Background="#FFF8E9">
                     <StackPanel Orientation="Vertical">
                         <Grid Height="210">
-                            <lvc:Gauge From="0" To="100" Value="{Binding CPULoad}"/>
+                            <lvc:Gauge From="0" To="100" Value="{Binding Performance.CPULoad}"/>
                         </Grid>
                         <StackPanel Orientation="Horizontal">
                             <Grid Height="150" Width="400" VerticalAlignment="Top">
@@ -51,7 +51,7 @@
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Performance.ProccessCount}"/>
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Процессов"/>
                                 <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Performance.Processes}"/>
-                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы"/>
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Время работы (в минутах)"/>
                                 <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Performance.TickCount}"/>
                                 <TextBlock Grid.Column="0" Grid.Row="4" Text="Выделено вирт. памяти (МБ)"/>
                                 <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Performance.VirtualMemorySize}"/>

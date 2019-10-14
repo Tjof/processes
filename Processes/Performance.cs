@@ -96,7 +96,7 @@ namespace Processes
 
         public int TickCount
         {
-            get { return Environment.TickCount & Int32.MaxValue; }
+            get { return _tickcount/60000; }
             set
             {
                 _tickcount = value;

@@ -80,7 +80,7 @@ namespace Processes
                     select x.GetPropertyValue(property));
         }
 
-        
+
 
         void PerformanceWHAAAAT()
         {
@@ -123,7 +123,7 @@ namespace Processes
                     sumVirtualMemorySize += i;
                 }
                 performance.VirtualMemorySize = sumVirtualMemorySize;
-                
+
                 var values = GetResults("Win32_PhysicalMemory", "Capacity");
                 ulong? Total = null;
                 foreach (var item in values)
@@ -135,15 +135,21 @@ namespace Processes
                         Total += casted.Value;
                     }
                 }
-                performance.TotalInstalledBytes = Total / 1024 /1024;
+                performance.TotalInstalledBytes = Total / 1024 / 1024;
 
                 PerformanceCounter ramFree = new PerformanceCounter("Memory", "Available MBytes");
                 performance.MemoryAvailable = ramFree.NextValue();
 
-                //PerformanceCounter memcounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+                //PerformanceCounter memcounter = new PerformanceCounter("Processor", "% Processor Time");
                 //performance.CPULoad = (int)(memcounter.NextValue());
 
+                ManagementObjectSearcher man = new ManagementObjectSearcher("SELECT LoadPercentage  FROM Win32_Processor");
+                foreach (ManagementObject obj in man.Get())
+                    performance.CPULoad = Convert.ToInt32(obj["LoadPercentage"]);
+
+
                 performance.TickCount = Environment.TickCount & Int32.MaxValue; // Время работы копьютера ШОК ПРЕОБРАЗОВАТЬ НАДО ВО ВРЕМЯ
+
             }
         }
 
